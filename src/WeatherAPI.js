@@ -11,16 +11,27 @@ async function initAPI(location) {
       throw new Error('Bad Request');
     }
     responseJSON = await response.json();
-    console.log(responseJSON);
     return responseJSON;
   } catch (err) {
-    console.log(`ERROR ${err}`);
+    console.error(`ERROR ${err}`);
+    throw err;
   }
+}
+
+async function getResponseJSON(responsePromise) {
+  await responsePromise;
+  return responseJSON;
 }
 
 async function getWeatherCondition(responsePromise) {
   await responsePromise;
   console.log(responseJSON);
+  return responseJSON.current;
 }
 
-export { initAPI, getWeatherCondition };
+async function getWeatherForecast(responsePromise) {
+  await responsePromise;
+  return responseJSON.forecast;
+}
+
+export { initAPI, getWeatherCondition, getWeatherForecast, getResponseJSON };
