@@ -1,5 +1,6 @@
 const startTime = 3;
 const endTime = 21;
+let cityInput;
 
 function setWeatherConditionDOM(response) {
   const mainTemp = document.querySelector('.temp h1');
@@ -87,4 +88,28 @@ function setForecastInfoDOM(response) {
   setForecastTemp(response.forecastday[0].hour);
 }
 
-export { setWeatherConditionDOM, setAirInfoDOM, setForecastInfoDOM };
+function getCityInputDOM() {
+  if (!cityInput) {
+    cityInput = document.querySelector('input');
+  }
+  cityInput.style.border = '1px solid black';
+  const city = cityInput.value;
+  cityInput.value = '';
+  return city;
+}
+
+function markInvalidInputDOM() {
+  if (!cityInput) {
+    cityInput = document.querySelector('input');
+  }
+
+  cityInput.style.border = '1px solid red';
+}
+
+export {
+  setWeatherConditionDOM,
+  setAirInfoDOM,
+  setForecastInfoDOM,
+  getCityInputDOM,
+  markInvalidInputDOM,
+};
